@@ -1,0 +1,94 @@
+"Termination","Black_elo_category","White_elo_category","increment","Game_type","Total_moves","Black_blunders","White_blunders"
+"Time forfeit","Low rating","Low rating",0,"Blitz",66,4,2
+"Normal","Low rating","Low rating",0,"Blitz",64,2,1
+"Time forfeit","High rating","Low rating",2,"Blitz",70,0,1
+"Normal","Low rating","High rating",2,"Blitz",86,4,2
+"Normal","Low rating","High rating",0,"Rapid",71,1,0
+"Normal","High rating","High rating",0,"Rapid",73,0,1
+"Normal","Low rating","Low rating",1,"Bullet",39,1,0
+"Time forfeit","Low rating","Low rating",1,"Bullet",110,6,6
+"Normal","Low rating","Low rating",2,"Blitz",69,7,3
+"Time forfeit","Low rating","Low rating",5,"Rapid",28,0,0
+"Normal","Low rating","Low rating",0,"Blitz",52,0,2
+"Normal","Low rating","Low rating",0,"Blitz",39,3,1
+"Normal","High rating","High rating",0,"Rapid",44,1,0
+"Normal","High rating","High rating",0,"Rapid",80,0,1
+"Normal","High rating","High rating",0,"Rapid",63,3,2
+"Normal","Low rating","Low rating",5,"Rapid",43,3,3
+"Normal","High rating","High rating",0,"Blitz",41,2,0
+"Normal","Low rating","Low rating",0,"Blitz",62,2,3
+"Time forfeit","Low rating","Low rating",0,"Blitz",71,2,3
+"Normal","High rating","High rating",0,"Classical",73,2,0
+"Normal","Low rating","Low rating",0,"Bullet",68,4,6
+"Time forfeit","Low rating","Low rating",0,"Bullet",55,0,0
+"Normal","High rating","High rating",0,"Bullet",83,1,0
+"Normal","Low rating","Low rating",2,"Blitz",63,2,0
+"Time forfeit","Low rating","Low rating",2,"Blitz",50,2,1
+"Normal","Low rating","Low rating",5,"Rapid",65,2,0
+"Normal","Low rating","Low rating",5,"Rapid",43,3,6
+"Normal","Low rating","Low rating",10,"Rapid",62,1,3
+"Normal","Low rating","Low rating",10,"Rapid",21,0,0
+"Normal","Low rating","Low rating",0,"Bullet",45,3,1
+"Time forfeit","Low rating","Low rating",0,"Bullet",37,4,4
+"Normal","High rating","High rating",0,"Blitz",80,1,3
+"Time forfeit","Low rating","Low rating",3,"Blitz",50,0,1
+"Normal","Low rating","Low rating",5,"Rapid",68,1,3
+"Normal","High rating","High rating",0,"Blitz",55,0,2
+"Normal","Low rating","Low rating",0,"Blitz",79,2,1
+"Normal","Low rating","Low rating",0,"Rapid",70,0,1
+"Normal","High rating","High rating",0,"Rapid",48,1,3
+"Time forfeit","Low rating","Low rating",0,"Rapid",66,0,1
+"Normal","High rating","High rating",0,"Rapid",45,2,1
+"Time forfeit","High rating","High rating",1,"Bullet",80,1,0
+"Normal","Low rating","Low rating",5,"Rapid",67,3,2
+"Normal","Low rating","Low rating",5,"Rapid",59,2,0
+"Normal","High rating","High rating",2,"Blitz",51,2,1
+"Normal","Low rating","Low rating",2,"Blitz",55,2,0
+"Normal","High rating","High rating",5,"Rapid",80,1,3
+"Normal","Low rating","Low rating",5,"Rapid",38,0,2
+"Normal","High rating","High rating",5,"Rapid",50,0,2
+"Normal","High rating","High rating",5,"Rapid",80,0,1
+"Time forfeit","Low rating","Low rating",0,"Bullet",71,1,0
+"Normal","Low rating","Low rating",2,"Blitz",60,1,3
+"Normal","High rating","High rating",2,"Blitz",199,0,0
+"Normal","Low rating","High rating",8,"Rapid",94,1,5
+"Normal","Low rating","Low rating",8,"Bullet",69,1,0
+"Normal","High rating","High rating",0,"Blitz",55,0,0
+"Normal","Low rating","Low rating",3,"Blitz",39,2,1
+"Normal","Low rating","Low rating",0,"Rapid",36,0,0
+"Normal","Low rating","Low rating",0,"Rapid",32,1,2
+"Normal","Low rating","Low rating",0,"Blitz",63,1,0
+"Time forfeit","Low rating","Low rating",0,"Blitz",63,4,2
+"Time forfeit","Low rating","Low rating",1,"Blitz",56,13,14
+"Normal","Low rating","Low rating",2,"Blitz",70,0,1
+"Normal","Low rating","Low rating",2,"Blitz",37,2,3
+"Normal","Low rating","Low rating",1,"Bullet",59,1,0
+"Normal","Low rating","Low rating",0,"Bullet",41,2,0
+"Time forfeit","Low rating","Low rating",0,"Bullet",85,0,1
+"Normal","High rating","High rating",0,"Rapid",23,0,0
+"Normal","Low rating","Low rating",5,"Rapid",125,8,8
+"Normal","High rating","High rating",5,"Rapid",82,0,1
+"Normal","Low rating","Low rating",5,"Rapid",66,2,3
+"Normal","Low rating","Low rating",5,"Rapid",80,0,1
+"Normal","High rating","High rating",5,"Rapid",69,1,0
+"Normal","High rating","High rating",5,"Rapid",106,1,1
+"Normal","Low rating","Low rating",0,"Blitz",95,5,5
+"Normal","Low rating","Low rating",3,"Classical",23,0,0
+"Normal","Low rating","Low rating",2,"Blitz",59,5,0
+"Normal","Low rating","High rating",2,"Blitz",85,1,0
+"Normal","High rating","High rating",5,"Rapid",195,0,1
+"Normal","Low rating","Low rating",5,"Rapid",168,6,8
+"Normal","Low rating","Low rating",5,"Rapid",62,3,3
+"Normal","Low rating","Low rating",5,"Rapid",95,1,1
+"Normal","Low rating","Low rating",0,"Rapid",44,4,4
+"Normal","High rating","Low rating",5,"Blitz",53,1,0
+"Normal","Low rating","Low rating",3,"Blitz",38,2,3
+"Normal","Low rating","Low rating",3,"Blitz",179,5,3
+"Normal","Low rating","Low rating",3,"Blitz",43,3,2
+"Normal","Low rating","Low rating",5,"Rapid",79,2,0
+"Normal","High rating","High rating",0,"Classical",90,1,2
+"Normal","Low rating","Low rating",0,"Bullet",92,0,2
+"Time forfeit","Low rating","Low rating",0,"Bullet",48,1,3
+"Normal","High rating","High rating",5,"Rapid",72,2,3
+"Normal","Low rating","Low rating",5,"Rapid",39,2,0
+"Normal","High rating","High rating",5,"Rapid",59,0,1
