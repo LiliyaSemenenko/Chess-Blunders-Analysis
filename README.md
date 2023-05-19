@@ -62,22 +62,50 @@ Inside the dataset, predictors have their meanings and categories:
 ## Method
 Since the response is countable, I decided to use the Poisson regression model for fitting. The method follows the following formulas:
 
+***Probability mass function***
+
+$\mathbb{P}(Y=y)=\frac{\lambda^{y} e^{-\lambda\}}{y !}, \quad y=0,1,2, \ldots$
+
+***Rate***
+
+$\lambda = \mathbb{E}(y) = e^{ \beta_{0} + \beta_{1} x_{1} + \cdots + \beta_{k} x_{k} \}$
+
+***Fitted Model***
+
+$\widehat{\lambda} = e^{\widehat{\beta}\_{0} + \widehat{\beta}\_{1} x_{1} + \cdots + \widehat{\beta}\_{k} x_{k}}$
+
+***Predicted Response***
+
+$y^{0}= e^{\widehat{\beta}\_{0}+\widehat{\beta}\_{1} x_{1}^{0}+\cdots+\widehat{\beta}\_{k} x_{k}^{0}}$
+
+## Tests
+
+In order to check the model's fit, the program ran a deviance test, which was then used to obtain a p-value. A p-value that is less than 0.05 means that the regression coefficient β is a significant predictor of the response variable at the 5% level of significance.
+
 ## Results
 Both R and SAS codes have similar outputs. Coefficients that are significant at the 5% level are termination by time forfeit, black player with a high rating, bullet game type, and the total number of moves. 
 
 $$
-\text{The fitted model rate} = e^{(0.296639 + 0.487098 \cdot \text{{termination by time forfeit}} - 0.108995 \cdot \text{{white player with high rating}} - 0.672123 \cdot \text{{black player with high rating}} - 0.007350 \cdot \text{{increment}} - 0.204080 \cdot \text{{blitz game}} - 0.583696 \cdot \text{{bullet game}} - 0.682544 \cdot \text{{classical game}} + 0.008025 \cdot \text{{total number of moves}})}
+\text{The fitted model rate} = exp(0.296639 + 0.487098 \cdot \text{{termination by time forfeit}} - 0.108995 \cdot \text{{white player with high rating}} -
+$$
+
+$$
+0.672123 \cdot \text{{black player with high rating}} - 0.007350 \cdot \text{{increment}} - 0.204080 \cdot \text{{blitz game}} - 0.583696 \cdot \text{{bullet game}} - 
+$$
+
+$$
+0.682544 \cdot \text{{classical game}} + 0.008025 \cdot \text{{total number of moves}})
 $$
 
 The estimated average number of blunders made by white when a game termination by time forfeit is 162.76% of that for abandoned games. When white plays against an opponent with a high rating, the estimated mean number of blunders made by white is 51.06% of that when its opponent has a low rating. If white decides to play a bullet game, the estimated average number of blunders they make is 55.78% of that for a rapid game. As the total number of moves increases by one, the estimated average number of blunders made by white increases by 0.81%. 
-Based on the deviance test, we can conclude that the Poisson model is a good fit due to the p-value being 4.875617e-05, which is less than 0.05.                                          
-When I tried to predict the number of blunders made by white given that the player has a low rating (below 1900), plays a rapid game (between 10 and 15 minutes) against an opponent with a high rating (between 1900 and 2400) who plays black, with 0-time increment, 40 total number of moves and the game terminated with checkmate, both R and SAS outputted 0.946971 using fitted Poisson prediction.
+
+Based on the deviance test conducted, we can conclude that the Poisson model is a good fit due to the p-value being 4.875617e-05, which is less than 0.05.             
 
 ## Predict number of blunders given predictor values
 
 Predict the number of blunders made by white given that the player  has a low rating (below 1900), plays a Rapid game (between 10 and 15 minutes) gainst an opponent with high rating (between 1900 and 2400) who plays black, with 0 time increment, 40 total number of moves, and the game terminated with checkmate.
 
-- Using fitted model for prediction
+- Using fitted model for prediction in R
   ```
   prediction = predict(fitted.model, type="response", data.frame(Termination.rel="Normal", White_cat.rel="Low rating", 
   Black_cat.rel="High rating", increment=0, Game_type.rel="Rapid", Total_moves=40))
@@ -86,7 +114,7 @@ Predict the number of blunders made by white given that the player  has a low ra
   Output: 0.946971
   ```
 
-- Calculate same y0 manually
+- Calculate same y0 manually in R
   ```
   y0 = exp(0.296639 - 0.672123 + 0.008025*40)
   print(y0)
@@ -95,7 +123,7 @@ Predict the number of blunders made by white given that the player  has a low ra
   ```
 
 ## Conclusion
-In conclusion, the fitting of the model resulted in 4 significant predictors termination by time forfeit, the black player with a high rating, bullet game type, and the total number of moves. The deviance test analysis shows that the Poisson regression method fits the data nicely. Now, we can exclude white Elo rating, increment, blitz, and classical game types from the model as their p-value is greater than 0.05. Overall, with the dataset and model, I was able to answer my objective questions and obtain informative results. This project taught me how methods learned in STAT 410 class could be applied to answer real-life questions.
+In conclusion, the fitting of the model resulted in 4 significant predictors termination by time forfeit, the black player with a high rating, bullet game type, and the total number of moves. The deviance test analysis shows that the Poisson regression method fits the data nicely. Now, we can exclude white Elo rating, increment, blitz, and classical game types from the model as their p-value is greater than 0.05.
 
 ## References
 [1] Lichess.org, https://lichess.org/.<br>
