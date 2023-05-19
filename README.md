@@ -24,60 +24,60 @@ Inside the dataset, predictors have their meanings and categories:
 
 - **Termination**
 
-  Time forfeit: one of the players ran out of time.
+  - Time forfeit: one of the players ran out of time.
   
-  Normal: game terminated with checkmate.
+  - Normal: game terminated with checkmate.
   
-  Rules infraction: the game was terminated due to rule-breaking.
+  - Rules infraction: the game was terminated due to rule-breaking.
   
-  Abandoned: the game was abandoned.
+  - Abandoned: the game was abandoned.
 
 - **Increment**
 
-  An amount of time is added to the player's main time after each move.
+  - An amount of time is added to the player's main time after each move.
 
 - **Game Type**
 
-  Bullet: starting time below 2 minutes.
+  - Bullet: starting time below 2 minutes.
   
-  Blitz: starting time between 2 and 10 minutes.
+  - Blitz: starting time between 2 and 10 minutes.
   
-  Rapid: starting time between 10 and 15 minutes.
+  - Rapid: starting time between 10 and 15 minutes.
   
-  Classical: starting time above 15 minutes or increment 2 minutes or higher.
+  - Classical: starting time above 15 minutes or increment 2 minutes or higher.
   
-  Correspondence: no time information.
+  - Correspondence: no time information.
 
 - **Total Moves**
 
-  A total number of moves in the game.
+  - A total number of moves in the game.
 
 - **ELO Category**
 
-  Low rating: rating below 1900 points.
+  - Low rating: rating below 1900 points.
   
-  High rating: rating above 1900 and below 2400 points.
+  - High rating: rating above 1900 and below 2400 points.
   
-  GM rating: rating above 2400 points.
+  - GM rating: rating above 2400 points.
 
 ## Method
 Since the response is countable, I decided to use the Poisson regression model for fitting. The method follows the following formulas:
 
-***Probability mass function***
+- ***Probability mass function***
 
-$\mathbb{P}(Y=y)=\frac{\lambda^{y} e^{-\lambda\}}{y !}, \quad y=0,1,2, \ldots$
+  $\mathbb{P}(Y=y)=\frac{\lambda^{y} e^{-\lambda\}}{y !}, \quad y=0,1,2, \ldots$
 
-***Rate***
+- ***Rate***
 
-$\lambda = \mathbb{E}(y) = e^{ \beta_{0} + \beta_{1} x_{1} + \cdots + \beta_{k} x_{k} \}$
+  $\lambda = \mathbb{E}(y) = e^{ \beta_{0} + \beta_{1} x_{1} + \cdots + \beta_{k} x_{k} \}$
 
-***Fitted Model***
+- ***Fitted Model***
 
-$\widehat{\lambda} = e^{\widehat{\beta}\_{0} + \widehat{\beta}\_{1} x_{1} + \cdots + \widehat{\beta}\_{k} x_{k}}$
+  $\widehat{\lambda} = e^{\widehat{\beta}\_{0} + \widehat{\beta}\_{1} x_{1} + \cdots + \widehat{\beta}\_{k} x_{k}}$
 
-***Predicted Response***
+- ***Predicted Response***
 
-$y^{0}= e^{\widehat{\beta}\_{0}+\widehat{\beta}\_{1} x_{1}^{0}+\cdots+\widehat{\beta}\_{k} x_{k}^{0}}$
+   $y^{0}= e^{\widehat{\beta}\_{0}+\widehat{\beta}\_{1} x_{1}^{0}+\cdots+\widehat{\beta}\_{k} x_{k}^{0}}$
 
 ## Tests
 
