@@ -11,160 +11,95 @@ Nowadays, chess is played by around 605 million adults on a regular basis, accor
 ## Data Description
 The data used in this project was found on Kaggle.com [4] but was originally posted on Lichess [5] database. Kaggle is an open online community for people interested in data science, where users post their data-related projects and datasets. Lichess is a free and open-source Internet chess server, where users may play and analyze their games. The data originally had 1044858 observations and 40 predictor variables. In this analysis, I sampled 93 observations from this data with 6 predictors. The response variable is telling us how many blunders a white player made in a given game. The predictors included are Termination (Time forfeit/Normal/Rules infraction/Abandoned), Increment, Game Type(Bullet/Blitz/Rapid/Classica/Correspondence), Total Moves,  and ELO Category for white and black (Low rating/High rating/GM rating). Since the response variable is counted, it is suggested to test if a Poisson regression model is suitable. 
 
+<p align="center">
+  <img width="700" height="400" src="https://github.com/LiliyaSemenenko/Chess-Blunders-Analysis/blob/main/data_sample.jpg">
+</p>
 
-
+<p align="center">
 Figure 1: Part of a dataset 
+</p>
 
 Inside the dataset, predictors have their meanings and categories:
 
-- Termination
-Time forfeit -- One of the players ran out of time.
-Normal -- Game terminated with checkmate.
-Rules infraction -- Game was terminated due to rule-breaking.
-Abandoned -- Game was abandoned.
+- **Termination**
 
-- Increment
-An amount of time is added to the player's main time after each move.
+  Time forfeit: one of the players ran out of time.
+  
+  Normal: game terminated with checkmate.
+  
+  Rules infraction: game was terminated due to rule-breaking.
+  
+  Abandoned: game was abandoned.
 
-- Game Type
-Bullet -- Starting time below 2 minutes.
-Blitz -- Starting time between 2 and 10 minutes.
-Rapid -- Starting time between 10 and 15 minutes.
-Classical -- Starting time above 15 minutes or increment 2 minutes or higher.
-Correspondence -- No time information.
+- **Increment**
 
-- Total Moves
-A total number of moves in the game.
+  An amount of time is added to the player's main time after each move.
 
-- ELO Category
-Low rating -- Rating below 1900.
-High rating -- Rating above 1900 and below 2400.
-GM rating -- Rating above 2400.
+- **Game Type**
 
+  Bullet: starting time below 2 minutes.
+  
+  Blitz: starting time between 2 and 10 minutes.
+  
+  Rapid: starting time between 10 and 15 minutes.
+  
+  Classical: starting time above 15 minutes or increment 2 minutes or higher.
+  
+  Correspondence: no time information.
 
-___________________________________________________________________
+- **Total Moves**
 
-## Introduction
+  A total number of moves in the game.
 
-Liliya_Bot is a chess engine fully written in Python that utilizes:
+- **ELO Category**
 
-- [minimax](https://en.wikipedia.org/wiki/Minimax) algorithm for move searching the best legal moves. The time complexity: O(b^d), where b is the number of legal moves at each point and d is the maximum depth of the tree;
-- [alpha-beta pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning), a simplified and much faster version of the minimax algorithm. Best-case time complexity: O(b^d/2).
-- simple evaluation function and an alternative incremental board evaluation. Both evaluation options include piece-square tables;
-- [move ordering](https://www.chessprogramming.org/Move_Ordering) based on heuristics like captures, positions on the board, and promotions;
-- a [Universal Chess Interface](http://wbec-ridderkerk.nl/html/UCIProtocol.html) to communicate with lichess.org and other GUI of your preference. Liliya_Bot is registered on [lichess](https://lichess.org/@/Liliya_Bot)!
-- a command-line user interface.
+  Low rating: rating below 1900 points.
+  
+  High rating: rating above 1900 and below 2400 points.
+  
+  GM rating: rating above 2400 points.
 
-# Play against Liliya-Bot!
-## Use it via command-line
+## Method
+Since the response is countable, I decided to use the Poisson regression model for fitting. The method follows the following formulas:
 
-The simplest way to run Liliya_Bot is through the terminal interface:
+## Results
+Both R and SAS codes have similar outputs. Coefficients that are significant at the 5% level are termination by time forfeit, black player with a high rating, bullet game type, and the total number of moves. 
 
-`python main.py`
+$$
+\text{The fitted model rate} = e^{(0.296639 + 0.487098 \cdot \text{{termination by time forfeit}} - 0.108995 \cdot \text{{white player with high rating}} - 0.672123 \cdot \text{{black player with high rating}} - 0.007350 \cdot \text{{increment}} - 0.204080 \cdot \text{{blitz game}} - 0.583696 \cdot \text{{bullet game}} - 0.682544 \cdot \text{{classical game}} + 0.008025 \cdot \text{{total number of moves}})}
+$$
 
-<pre>
-_________________________
-White  to move
+The estimated average number of blunders made by white when a game termination by time forfeit is 162.76% of that for abandoned games. When white plays against an opponent with a high rating, the estimated mean number of blunders made by white is 51.06% of that when its opponent has a low rating. If white decides to play a bullet game, the estimated average number of blunders they make is 55.78% of that for a rapid game. As the total number of moves increases by one, the estimated average number of blunders made by white increases by 0.81%. 
+Based on the deviance test, we can conclude that the Poisson model is a good fit due to the p-value being 4.875617e-05, which is less than 0.05.                                          
+When I tried to predict the number of blunders made by white given that the player has a low rating (below 1900), plays a rapid game (between 10 and 15 minutes) against an opponent with a high rating (between 1900 and 2400) who plays black, with 0-time increment, 40 total number of moves and the game terminated with checkmate, both R and SAS outputted 0.946971 using fitted Poisson prediction.
 
-Enter current & destination square or resign: e2e4
+## Predict number of blunders given predictor values
 
-evaluation:  40 
+Predict the number of blunders made by white given that the player  has a low rating (below 1900), plays a Rapid game (between 10 and 15 minutes) gainst an opponent with high rating (between 1900 and 2400) who plays black, with 0 time increment, 40 total number of moves, and the game terminated with checkmate.
 
-8 ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-7 ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
-6 ☐ ☐ ☐ ☐ ☐ ☐ ☐ ☐ 
-5 ☐ ☐ ☐ ☐ ☐ ☐ ☐ ☐ 
-4 ☐ ☐ ☐ ☐ ♙ ☐ ☐ ☐ 
-3 ☐ ☐ ☐ ☐ ☐ ☐ ☐ ☐ 
-2 ♙ ♙ ♙ ♙ ☐ ♙ ♙ ♙ 
-1 ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-  a  b  c  d  e  f  g  h
+- Using fitted model for prediction
+  ```
+  prediction = predict(fitted.model, type="response", data.frame(Termination.rel="Normal", White_cat.rel="Low rating", 
+  Black_cat.rel="High rating", increment=0, Game_type.rel="Rapid", Total_moves=40))
+  print(prediction)
 
-Total number of moves:  1 
-_________________________
-Black  to move
+  Output: 0.946971
+  ```
 
-chosen move: g8f6 
+- Calculate same y0 manually
+  ```
+  y0 = exp(0.296639 - 0.672123 + 0.008025*40)
+  print(y0)
 
-evaluation:  -10 
+  Output: 0.9469737
+  ```
 
-8 ♜ ♞ ♝ ♛ ♚ ♝ ☐ ♜ 
-7 ♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
-6 ☐ ☐ ☐ ☐ ☐ ♞ ☐ ☐ 
-5 ☐ ☐ ☐ ☐ ☐ ☐ ☐ ☐ 
-4 ☐ ☐ ☐ ☐ ♙ ☐ ☐ ☐ 
-3 ☐ ☐ ☐ ☐ ☐ ☐ ☐ ☐ 
-2 ♙ ♙ ♙ ♙ ☐ ♙ ♙ ♙ 
-1 ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
-  a  b  c  d  e  f  g  h
+## Conclusion
+In conclusion, the fitting of the model resulted in 4 significant predictors termination by time forfeit, the black player with a high rating, bullet game type, and the total number of moves. The deviance test analysis shows that the Poisson regression method fits the data nicely. Now, we can exclude white Elo rating, increment, blitz, and classical game types from the model as their p-value is greater than 0.05. Overall, with the dataset and model, I was able to answer my objective questions and obtain informative results. This project taught me how methods learned in STAT 410 class could be applied to answer real-life questions.
 
-Total number of moves:  2 
-_________________________
-</pre>
-
-## Use it as a UCI engine
-
-`python uci.py`
-
-This is how the communication between the engine and GUI can look like (responses have '#'):
-
-```
-uci
-# id name Liliya-Bot
-# id author Liliya
-# uciok
-isready
-# readyok
-ucinewgame
-position startpos moves e2e4
-go
-# bestmove g8f6
-b1c3
-# bestmove b8c6 
-```
-To quit the game, type `quit`
-
-Note: Liliya_Bot does not accept a FEN string.
-
-<br>
-
-See the [UCI interface doc](https://www.wbec-ridderkerk.nl/html/UCIProtocol.html) for more information on communicating with the engine.
-
-## Connect it to Lichess.org
-
-To play Liliya_Bot on lichess.org, you'll need to use a tool [ShailChoksi/lichess-bot](https://github.com/ShailChoksi/lichess-bot), which acts as a bridge between the Lichess API and chess engines. Additionally, you'll need a BOT account. To use this tool, you'll also need to generate an engine executable file using [pyinstaller](https://www.pyinstaller.org/).
-
-# Tests
-
-To test the engine's performance, an average time engine has used to choose the best move and an evaluation plot are printed after every game. A positive evaluation score means white is winning, negative means black is winning, and 0 is a draw.
-
-Output example where white was clearly winning:
-
-`Average engine time per move:  0.209038734436035` 
-
-![game eval](https://github.com/LiliyaSemenenko/Chess_Engine/blob/master/plots/evalplot.png)
-
-In addition, `python test.py` could be used to run n number of games and test their result and the number of moves it took Liliya_Bot to win. It will also record the number of games, which failed to run till the end due to a bug.
-
-An experiment involving a compilation of 100 games at depth 3, where the engine operated as the white player against a random black player (random mode uses no heuristics and picks any legal move available), was carried out. The outcomes are illustrated in the plots displayed below:
-![100 games reslut](https://github.com/LiliyaSemenenko/Chess_Engine/blob/master/plots/testBar_depth_3.png)
-![100 games distribution](https://github.com/LiliyaSemenenko/Chess_Engine/blob/master/plots/testHist_depth_3.png)
-
-`Failed games: 0`
-
-# Limitations
-
-Liliya_Bot supports all chess rules, except:
-
-- threefold repetition rule
-- fifty-move rule
-- fivefold repetition
-- seventy-five-move rule
-- draw by mutual agreement
-- en passant capture
-
-# Contribution
-
-If you would like to contribute by proposing a bug fix or a new feature, please raise an issue. You can also choose to work on an existing issue. If you need any help along the way, feel free to reach out to ([@LiliyaSemenenko](https://github.com/LiliyaSemenenko)).
-
-
+## References
+[1] Lichess.org, https://lichess.org/.<br>
+[2] “Chess.” Wikipedia, Wikimedia Foundation, 11 Dec. 2022, https://en.wikipedia.org/wiki/Chess.<br>
+[3] Emmett, Ryan. “How Popular Is Chess?” Chess.com, Chess.com, 9 Mar. 2020, https://www.chess.com/news/view/how-popular-is-chess-8306.<br>
+[4] Noobiedatascientist. “Analysis of Lichess Games.” Kaggle, Kaggle, 23 Dec. 2021, https://www.kaggle.com/code/noobiedatascientist/analysis-of-lichess-games/data?select=Sept_20_analysis.csv.<br>
+[5] “Lichess.org Open Database.” Lichess.org Open Database, https://database.lichess.org/. <br>
