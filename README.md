@@ -1,8 +1,8 @@
 # Chess-Blunders-Analysis
-Analysis of chess blunders using Poisson Regression model in both R and SAS.
+Analysis of chess blunders using the Poisson Regression model in both R and SAS.
 
 ## Introduction
-Since September 2022, my passion for chess has grown immensely, leading me to play the game daily. Seeking improvement, I immersed myself in analyzing chess games at various skill levels. Through this exploration, I made a fascinating observation: regardless of players' strength, they can still make blunders during a game. As blundering remains a challenge for me personally, I embarked on a project to explore a dataset related to chess blunders. This dataset, sourced from Kaggle and originally posted on Lichess [1], provides predictors for both white and black players, alongside a response variable indicating the total number of blunders made by white. To identify significant predictors of blunders, I employed the Poisson regression method.
+Since September 2022, my passion for chess has grown immensely, leading me to play the game daily. Seeking improvement, I immersed myself in analyzing chess games at various skill levels. Through this exploration, I made a fascinating observation: regardless of players' strength, they can still make blunders during a game. As blundering remains a challenge for me, I embarked on a project to explore a dataset related to chess blunders. This dataset, sourced from Kaggle and originally posted on Lichess [1], provides predictors for both white and black players, alongside a response variable indicating the total number of blunders made by white. To identify significant predictors of blunders, I employed the Poisson regression method.
 
 ## Background
 This project explores the occurrence of blunders in the game of chess. Chess, a renowned board game dating back to the 7th century, involves two players competing on a 64-square board arranged in an eight-by-eight grid. Each player begins with sixteen pieces, including a king, queen, rooks, bishops, knights, and pawns. The game commences with the player controlling the white pieces, followed by the player controlling the black pieces. The objective is to checkmate the opponent's king, rendering it under immediate attack (check) with no escape (checkmate). Additionally, there are various ways a game can end in a draw [2].
@@ -28,9 +28,9 @@ Inside the dataset, predictors have their meanings and categories:
   
   Normal: game terminated with checkmate.
   
-  Rules infraction: game was terminated due to rule-breaking.
+  Rules infraction: the game was terminated due to rule-breaking.
   
-  Abandoned: game was abandoned.
+  Abandoned: the game was abandoned.
 
 - **Increment**
 
@@ -106,9 +106,9 @@ The estimated average number of blunders made by white when a game termination b
 
 ## Predict number of blunders given predictor values
 
-Predict the number of blunders made by white given that the player  has a low rating (below 1900), plays a Rapid game (between 10 and 15 minutes) gainst an opponent with high rating (between 1900 and 2400) who plays black, with 0 time increment, 40 total number of moves, and the game terminated with checkmate.
+Predict the number of blunders made by white given that the player has a low rating (below 1900), plays a Rapid game (between 10 and 15 minutes) against an opponent with a high rating (between 1900 and 2400) who plays black, with 0 time increment, 40 total number of moves, and the game terminated with checkmate.
 
-- Using fitted model for prediction in R
+- Using a fitted model for prediction in R
   ```
   prediction = predict(fitted.model, type="response", data.frame(Termination.rel="Normal", White_cat.rel="Low rating", 
   Black_cat.rel="High rating", increment=0, Game_type.rel="Rapid", Total_moves=40))
@@ -117,7 +117,7 @@ Predict the number of blunders made by white given that the player  has a low ra
   Output: 0.946971
   ```
 
-- Calculate same y0 manually in R
+- Calculate the same y0 (number of blunders) manually in R
   ```
   y0 = exp(0.296639 - 0.672123 + 0.008025*40)
   print(y0)
